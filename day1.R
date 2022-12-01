@@ -7,8 +7,7 @@ df <- input %>%
   group_by(elf) %>% 
   summarise(total_calories = sum(calories, na.rm = TRUE))
 
-df %>% 
-  slice_max(total_calories, n = 1)
+df %>% slice_max(total_calories, n = 1)
 
 # star 2
 df %>% 
