@@ -1,5 +1,5 @@
 library(tidyverse)
-input <- tibble(calories = as.integer(read_lines("day1_input.txt")))
+input <- tibble(calories = as.integer(read_lines("data/day1_input.txt")))
 
 # star 1
 df <- input %>%
