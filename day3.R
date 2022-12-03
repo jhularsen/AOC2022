@@ -4,9 +4,8 @@ input <- tibble(x = read_lines("data/day3_input.txt"))
 # star 1
 input %>% 
   mutate(bag = row_number(),
-         length = nchar(x),
-         first_half = substring(x, 1, length/2),
-         second_half = substring(x, length/2 + 1, length),
+         first_half = substring(x, 1, nchar(x)/2),
+         second_half = substring(x, nchar(x)/2 + 1, nchar(x)),
          first_half_letters = str_extract_all(first_half, "[A-z]"),
          second_half_letters = str_extract_all(second_half, "[A-z]")) %>% 
   unnest(first_half_letters) %>% 
