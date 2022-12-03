@@ -11,16 +11,12 @@ input %>%
   unnest(second_half_letters) %>% 
   filter(first_half_letters == second_half_letters) %>% 
   unique() %>% 
-  rowwise() %>% 
-  mutate(prio = which(first_half_letters == c(letters, LETTERS))) %>% 
-  ungroup() %>% 
-  summarise(res = sum(prio))
+  summarise(res = sum(match(first_half_letters, c(letters, LETTERS))))
 
 # star 2
 input %>% 
   mutate(group = (row_number() + 2) %/% 3) %>% 
-  group_by(group) %>% 
-  mutate(bag_group = c("bag1", "bag2", "bag3")) %>% 
+  mutate(bag_group = rep(c("bag1", "bag2", "bag3"), 100)) %>% 
   pivot_wider(id_cols = group, names_from = bag_group, values_from = x) %>% 
   mutate(first_bag = str_extract_all(bag1, "[A-z]"),
          second_bag = str_extract_all(bag2, "[A-z]"),
@@ -28,11 +24,8 @@ input %>%
   unnest(first_bag) %>% 
   unnest(second_bag) %>% 
   unnest(third_bag) %>% 
-  group_by(group) %>% 
   filter(first_bag == second_bag & first_bag == third_bag & second_bag == third_bag) %>% 
   unique() %>% 
-  mutate(prio = which(first_bag == c(letters, LETTERS))) %>% 
-  ungroup() %>% 
-  summarise(res = sum(prio))
+  summarise(res = sum(match(first_bag, c(letters, LETTERS))))
 
 
