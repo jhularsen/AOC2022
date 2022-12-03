@@ -16,7 +16,7 @@ input %>%
 # star 2
 input %>% 
   mutate(group = (row_number() + 2) %/% 3) %>% 
-  mutate(bag_group = rep(c("bag1", "bag2", "bag3"), 100)) %>% 
+  mutate(bag_group = rep(c("bag1", "bag2", "bag3"), nrow(input)/3)) %>% 
   pivot_wider(id_cols = group, names_from = bag_group, values_from = x) %>% 
   mutate(first_bag = str_extract_all(bag1, "[A-z]"),
          second_bag = str_extract_all(bag2, "[A-z]"),
