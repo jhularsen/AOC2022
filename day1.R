@@ -3,8 +3,7 @@ input <- tibble(calories = as.integer(read_lines("data/day1_input.txt")))
 
 # star 1
 df <- input %>%
-  mutate(elf = cumsum(is.na(calories))+1) %>%
-  group_by(elf) %>% 
+  group_by(elf = cumsum(is.na(calories))) %>% 
   summarise(total_calories = sum(calories, na.rm = TRUE))
 
 df %>% slice_max(total_calories, n = 1)
