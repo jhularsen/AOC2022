@@ -27,6 +27,6 @@ dir_sizes %>%
   
 # star2 
 dir_sizes %>% 
-  mutate(space_needed = head(dir_sizes$size, 1) + 30000000 - 70000000) %>% 
+  mutate(space_needed = 30000000 - (70000000 - head(dir_sizes$size, 1))) %>% 
   filter(size >= space_needed) %>% 
   summarise(res = min(size))
