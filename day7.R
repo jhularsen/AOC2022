@@ -29,4 +29,4 @@ dir_sizes %>%
 dir_sizes %>% 
   mutate(space_needed = head(dir_sizes$size, 1) + 30000000 - 70000000) %>% 
   filter(size >= space_needed) %>% 
-  summarise(min = min(size))
+  summarise(res = min(size))
